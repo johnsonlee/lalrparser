@@ -1,0 +1,26 @@
+#!/bin/sh
+
+INDENT="    "
+
+cat << EOF > $2
+#include <lalr/language-manager.h>
+
+EOF
+
+ls -l $1/ | grep ^d | awk '{print $NF}' | while read lang; do
+    echo "extern parser_t ${lang}_parser;" >> $2
+done
+
+cat << EOF >> $2
+
+struct language languages[] = {
+EOF
+
+ls -l $1/ | grep ^d | awk '{print $NF}' | while read lang; do
+    echo "${INDENT}{ \"$lang\", &${lang}_parser }," >> $2
+done
+
+cat << EOF >> $2
+${INDENT}NULL
+};
+EOF
