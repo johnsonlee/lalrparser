@@ -4,12 +4,12 @@
         'type'         : 'none',
         'actions'      : [{
             'variables' : {
-                'json.l' : 'src/json/json.l',
-                'lexer'  : 'src/json/lexer.c',
+                'lfile' : 'src/json/json.l',
+                'lexer' : 'src/json/lexer.c',
             },
             'action_name' : 'lexer',
             'inputs'   : [
-                '<@(json.l)',
+                '<@(lfile)',
             ],
             'outputs'  : [
                 '<@(lexer)',
@@ -17,16 +17,16 @@
             'action'   : [
                 'lex',
                 '--outfile=<@(lexer)',
-                '<@(json.l)',
+                '<@(lfile)',
             ],
         },{
             'variables' : {
-                'json.y' : 'src/json/json.y',
+                'yfile'  : 'src/json/json.y',
                 'parser' : 'src/json/parser.c',
             },
             'action_name' : 'parser',
             'inputs'   : [
-                '<@(json.y)',
+                '<@(yfile)',
             ],
             'outputs'  : [
                 '<@(parser)',
@@ -35,7 +35,7 @@
                 'yacc',
                 '--output=<@(parser)',
                 '-d',
-                '<@(json.y)',
+                '<@(yfile)',
             ],
         }],
     },{
