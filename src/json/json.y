@@ -281,7 +281,7 @@ static void json_parser_fprint_number_node(struct json_number_node *json, FILE *
 
 static void json_parser_fprint_member_node(struct json_member_node *json, FILE *fp)
 {
-    fprintf(fp, "%s : ", json->name);
+    fprintf(fp, "\"%s\" : ", json->name);
     json_parser_fprint(json->value, fp);
 }
 
@@ -310,7 +310,7 @@ static void json_parser_fprint_object_node(struct json_object_node *json, FILE *
 
 static void json_parser_fprint_string_node(struct json_string_node *json, FILE *fp)
 {
-    fprintf(fp, "%s", json->value);
+    fprintf(fp, "\"%s\"", json->value);
 }
 
 %}

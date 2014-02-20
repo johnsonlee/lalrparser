@@ -4,19 +4,14 @@
 
 int main(int argc, char *argv[])
 {
-    parser_t *parser;
-    struct ast *ast;
-    struct language *lang;
-    
-    lang = language_manager_get_language("json");
+    parser_t *parser = language_manager_get_parser("json");
 
-    if (NULL == lang) {
+    if (NULL == parser) {
         perror("JSON parser not found!");
         return -1;
     }
 
-    parser = lang->parser;
-    ast = parser->parse();
+    struct ast *ast = parser->parse();
 
     if (NULL != ast) {
         parser->print(ast->root);

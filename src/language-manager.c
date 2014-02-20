@@ -14,3 +14,14 @@ struct language* language_manager_get_language(const char *name)
 
     return NULL;
 }
+
+parser_t* language_manager_get_parser(const char *name)
+{
+    struct language *lang = language_manager_get_language(name);
+
+    if (NULL != lang) {
+        return lang->parser;
+    }
+
+    return NULL;
+}
